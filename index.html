@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html class="h-100">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Daydream Gallery</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/monokai-sublime.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/solid.css"
+      integrity="sha384-r/k8YTFqmlOaqRkZuSiE9trsrDXkh07mRaoGBMoDcmA58OHILZPsk29i2BsFng1B"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/fontawesome.css"
+      integrity="sha384-4aon80D8rXCGx9ayDt85LbyUHeMWd3UiBaWliBlJ53yzm9hqN21A+o1pqoyK04h+"
+      crossorigin="anonymous"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.auth0.com/js/auth0-samples-theme/1.0/css/auth0-theme.min.css"
+    />
+  </head>
+
+  <body class="h-100">
+    <div id="app" class="h-100 d-flex flex-column">
+      <div class="nav-container">
+        <nav class="navbar navbar-expand-md navbar-light bg-light">
+          <div class="container">
+            <div class="navbar-brand"></div>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a href="/" class="nav-link route-link">Home</a>
+                </li>
+              </ul>
+              <ul class="navbar-nav d-none d-md-block">
+                <!-- Login button: show if NOT authenticated -->
+                <li class="nav-item auth-invisible">
+                  <button
+                    id="qsLoginBtn"
+                    onclick="login()"
+                    class="btn btn-primary btn-margin auth-invisible hidden"
+                  >
+                    Log in
+                  </button>
+                </li>
+                <!-- / Login button -->
+
+                <!-- Fullsize dropdown: show if authenticated -->
+                <li class="nav-item dropdown auth-visible hidden">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    id="profileDropDown"
+                    data-toggle="dropdown"
+                  >
+                    <!-- Profile image should be set to the profile picture from the id token -->
+                    <img
+                      alt="Profile picture"
+                      class="nav-user-profile profile-image rounded-circle"
+                      width="50"
+                    />
+                  </a>
+                  <div class="dropdown-menu">
+                    <!-- Show the user's full name from the id token here -->
+                    <div class="dropdown-header nav-user-name user-name"></div>
+                    <a
+                      href="/profile"
+                      class="dropdown-item dropdown-profile route-link"
+                    >
+                      <i class="fas fa-user mr-3"></i> Profile
+                    </a>
+                    <a
+                      href="#"
+                      class="dropdown-item"
+                      id="qsLogoutBtn"
+                      onclick="logout()"
+                    >
+                      <i class="fas fa-power-off mr-3"></i> Log out
+                    </a>
+                  </div>
+                </li>
+                <!-- /Fullsize dropdown -->
+              </ul>
+
+              <!-- Responsive login button: show if NOT authenticated -->
+              <ul class="navbar-nav d-md-none auth-invisible">
+                <button
+                  class="btn btn-primary btn-block auth-invisible hidden"
+                  id="qsLoginBtn"
+                  onclick="login()"
+                >
+                  Log in
+                </button>
+              </ul>
+              <!-- /Responsive login button -->
+
+              <!-- Responsive profile dropdown: show if authenticated -->
+              <ul
+                class="
+                  navbar-nav
+                  d-md-none
+                  auth-visible
+                  hidden
+                  justify-content-between
+                "
+                style="min-height: 125px"
+              >
+                <li class="nav-item">
+                  <span class="user-info">
+                    <!-- Profile image should be set to the profile picture from the id token -->
+                    <img
+                      alt="Profile picture"
+                      class="
+                        nav-user-profile
+                        d-inline-block
+                        profile-image
+                        rounded-circle
+                        mr-3
+                      "
+                      width="50"
+                    />
+                    <!-- Show the user's full name from the id token here -->
+                    <h6 class="d-inline-block nav-user-name user-name"></h6>
+                  </span>
+                </li>
+                <li>
+                  <i class="fas fa-user mr-3"></i>
+                  <a href="/profile" class="route-link">Profile</a>
+                </li>
+
+                <li>
+                  <i class="fas fa-power-off mr-3"></i>
+                  <a href="#" id="qsLogoutBtn" onclick="logout()">Log out</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+
+      <div id="main-content" class="container mt-5 flex-grow-1">
+        <div id="content-home" class="page">
+          <div class="text-center">
+            <img
+              class="mb-3 app-logo"
+              src="/images/logo.png"
+              alt="Daydream logo"
+              width="500"
+              height="175"
+            />
+            <h1 class="mb-4">Daydream Photo Gallery</h1>
+
+            <p class="lead">
+              This is the Daydream Adelaide Event Photography Gallery. It is a
+              collection of photos captured during the event.
+            </p>
+          </div>
+
+          <div class="other-links">
+            <h2 class="my-5 text-center">Other links</h2>
+
+            <div class="row">
+              <div class="col-md-5 mb-4">
+                <h6 class="mb-3">
+                  <a href="https://intranet.daydreamadl.dev">
+                    <i class="fas fa-link"></i> Daydream Intranet
+                  </a>
+                </h6>
+                <p>
+The Daydream Intranet is the internal website for Daydream Adelaide. It contains <b>important announcements</b>, event timing, resources, and weather.
+                </p>
+              </div>
+
+              <div class="col-md"></div>
+
+              <div class="col-md-5 mb-4">
+                <h6 class="mb-3">
+                  <a href="https://daydream.hackclub.com/Adelaide">
+                    <i class="fas fa-link"></i> Offical website
+                  </a>
+                </h6>
+                <p>
+Here is the official website for Daydream Adelaide. It contains information about the event, including the schedule, location, and sign ups!
+                </p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-5 mb-4">
+                <h6 class="mb-3">
+                  <a href="https://hackclub.com">
+                    <i class="fas fa-link"></i> Hack Club
+                  </a>
+                </h6>
+                <p>
+This is the actual offical website for Hack Club, the organisation that runs Daydream/Daydream Adelaide. Hack Club is a global network of high school coding clubs where members learn to code, build projects, and share their creations.
+                </p>
+              </div>
+
+              <div class="col-md"></div>
+
+              <div class="col-md-5 mb-4">
+                <h6 class="mb-3">
+                  <a href="https://aushc.softr.app">
+                    <i class="fas fa-link"></i> Hack Club Australia
+                  </a>
+                </h6>
+                <p>
+Yo, welcome to the land down under, mate! This is the (un)offical country website for Hack Clubs in Australia, you can find club announcements and clubs near you!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="page" id="content-profile">
+          <div class="container">
+            <div class="row align-items-center profile-header">
+              <div class="col-md-2">
+                <img
+                  alt="User's profile picture"
+                  class="rounded-circle img-fluid profile-image mb-3 mb-md-0"
+                />
+              </div>
+              <div class="col-md">
+                <h2 class="user-name"></h2>
+                <p class="lead text-muted user-email"></p>
+              </div>
+            </div>
+
+            <div class="row">
+              <pre class="rounded">
+                <code id="profile-data" class="json"></code></pre>
+            </div>
+            <div class="row mt-5">
+              <div class="col-12">
+                <h3>Photo Gallery</h3>
+                <div class="row" id="photo-gallery"></div>
+              </div>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="bg-light text-center p-5">
+        <div class="mb-3 app-logo"></div>
+        <p>
+          Created with ❤️ by
+          <a href="https://daydream.hackclub.com/adelaide">Daydream Adelaide</a>
+        </p>
+      </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
