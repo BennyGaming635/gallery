@@ -135,4 +135,3 @@ window.onpopstate = (e) => {
     showContentFromUrl(e.state.url);
   }
 };
-

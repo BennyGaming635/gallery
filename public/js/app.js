@@ -130,4 +130,3 @@ window.onload = async () => {
 
   updateUI();
 };
-
