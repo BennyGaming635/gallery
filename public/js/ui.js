@@ -11,7 +11,7 @@ const router = {
 
 const galleryPhotos = [
   {
-    file: "https://raw.githubusercontent.com/adldaydream/intranet/main/apps/photos/uploads/09-08-2025_evacuate.png",
+    file: "https://raw.githubusercontent.com/adldaydream/intranet/main/archive/photos/uploads/09-08-2025_evacuate.png",
     addedBy: "Ben",
     date: "2025-09-07"
   },
@@ -135,3 +135,4 @@ window.onpopstate = (e) => {
     showContentFromUrl(e.state.url);
   }
 };
+
